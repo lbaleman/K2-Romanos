@@ -1,5 +1,6 @@
 import unittest
 from romanosClase import romano_a_arabigo, contarParentesis, arabigo_a_romano, dividirgt1000
+from romannumber import RomanNumber
 
 class RomanNumberTest(unittest.TestCase):
     def test_symbols_romas(self):
@@ -41,7 +42,7 @@ class RomanNumberTest(unittest.TestCase):
 class ArabicNumberTest(unittest.TestCase):
     def test_unidades(self):
         self.assertEqual(arabigo_a_romano(1), 'I')
-        self.assertEqual(arabigo_a_romano(2), 'II')
+        self.assertEqual(arabigo_a_romano(23), 'XXIII')
         self.assertEqual(arabigo_a_romano(4), 'IV')
 
     def test_arabic_a_roman(self):
@@ -58,7 +59,12 @@ class ArabicNumberTest(unittest.TestCase):
     def test_gruposde1000(self):
         self.assertEqual(dividirgt1000(7763147686), [[3,7],[2,760],[1,3147],[0,686]])
         self.assertEqual(dividirgt1000(3763142686), [[3,0], [2,3760],[1,3140],[0,2686]])
+        self.assertEqual(dividirgt1000(763142686), [[2,760],[1,3140],[0,2686]])
 
-
+class RomanNumberClassTest(unittest.TestCase):
+    def test_create_romannumber(self):
+        nr = RomanNumber(23)
+        self.assertEqual((str(nr)), 'XXIII')
+    
 if __name__=='__main__':
     unittest.main()

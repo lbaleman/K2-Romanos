@@ -114,12 +114,23 @@ def dividirgt1000(numArabigo):
     numP=0
     div = []
     
-    for i in range(len(inv)-1,-1, -3):
-        numP = int(i/3)
-        if i>0:
-            div.append([numP,int(inv[i+2:i-1:-1])])
-        else:
-            div.append([numP,int(inv[i+2::-1])])
+    if len(inv) % 3 != 0:
+    
+        for i in range(len(inv)-1,-1, -3):
+            numP = int(i/3)
+            
+            if i>0 and len(inv) >= 3:
+                div.append([numP,int(inv[i+2:i-1:-1])])
+            else:
+                div.append([numP,int(inv[i+2::-1])])   
+    else:
+        
+        for i in range(len(inv)-1,-1, -3):
+            numP = int(i/3)
+            if i>2:
+                div.append([numP,int(inv[i:i-3:-1])])
+            else:
+                div.append([numP,int(inv[i::-1])])
     
     for j in range(len(div)-1):
         grupoMayor = div[j]
@@ -167,12 +178,10 @@ def arabigo_a_romano(numArabigo):
         numero = grupo[1]
         rango = grupo[0]
 
-        if numero < 0:
+        if numero > 0:
             romanoGlobal += '('*rango + arabigo_individual(numero) + ')'*rango
         else:
             pass
     
     return romanoGlobal 
-
-print(arabigo_a_romano(3763147686))
 
